@@ -27,7 +27,7 @@ Route::post('/send-friend-request/{user}', [FriendshipController::class, 'sendFr
     ->middleware('auth')
     ->name('sendFriendRequest');
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/', [HomeController::class, 'userHome'])->middleware('auth');
+Route::get('/home', [HomeController::class, 'userHome'])->middleware('auth');
 
 
 Route::get('/users/{user}', [UserController::class, 'show'])->name('user.show');
