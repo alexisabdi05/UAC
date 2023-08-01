@@ -8,7 +8,7 @@
         <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
         <a class="nav-item nav-link" href="#">Profile</a>
         <a class="nav-item nav-link" href="#">Friends</a>
-        <a class="nav-item nav-link" href="store">Store</a>
+        <a class="nav-item nav-link" href="/store">Store</a>
       </div>
     </div>
   </nav>
