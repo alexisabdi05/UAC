@@ -37,7 +37,7 @@ class PaymentController extends Controller
         }
     
         // If the payment amount is equal to the registration price
-        return redirect('/home')->with('paymentSuccess', 'Payment successful!');
+        return redirect('/')->with('paymentSuccess', 'Payment successful!');
     }
     
     public function enterBalance(Request $request)
@@ -52,7 +52,7 @@ class PaymentController extends Controller
         $user->wallet += $overpaidAmount;
         $user->save();
 
-        return redirect('/home')->with('paymentSuccess', 'Payment successful with balance added to your wallet!');
+        return redirect('/')->with('paymentSuccess', 'Payment successful with balance added to your wallet!');
     } else {
         // User declined to enter the balance, redirect them back to the payment page
         return redirect()->route('payment.show');
