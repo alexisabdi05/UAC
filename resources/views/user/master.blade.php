@@ -10,10 +10,9 @@
     <title>Document</title>
 </head>
 <body>
-    @include('buyer.header')
+    @include('user.navbar')
     <div>
         @yield('content')
     </div>
-    @include('buyer.footer')
 </body>
 </html>

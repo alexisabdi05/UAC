@@ -9,19 +9,44 @@ use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
     //
+
+    public function create()
+    {
+        $registrationPrice = rand(100000, 125000);
+        return view('register', compact('registrationPrice'));
+    }
+
     public function store(Request $request){
-        $validate = $request->validate([
-            'name' => 'required',
-            'password' => 'required|min:4',
-            'email' => 'required|unique:users|email:dns',
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:8',
             'gender' => 'required',
-            'role' => 'required'
+            'hobbies' => 'required|array|min:3',
+            'hobbies.*' => 'string|max:255',
+            'instagram_username' => 'required|url',
+            'mobile_number' => 'required|digits_between:10,15',
+            'casual_friends' => 'required|boolean',
+            'registration_price' => 'required|integer|between:100000,125000',
+        ]);
+    
+        $user = new User([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password), 
+            'gender' => $request->gender,
+            'hobbies' => implode(', ', $request->hobbies),
+            'instagram_username' => $request->instagram_username,
+            'mobile_number' => $request->mobile_number,
+            'casual_friends' => $request->has('casual_friends'),
+            'registration_price' => $request->registration_price,
+            'profile_picture_url' => 'default.png',
         ]);
 
-        $validate['password'] = bcrypt($validate['password']);
-        User::create($validate);
+        $user->save();
+        Auth::login($user);
 
-        return redirect('/login')->with('registerSuccess', 'You success register');
+        return redirect('/show-price')->with('registerSuccess', 'You success register');
     }
 
     public function login(Request $request){
@@ -32,13 +57,6 @@ class LoginController extends Controller
 
         if(Auth::attempt($validate)){
             $request->session()->regenerate();
-            $role = auth()->user()->role;
-            if ($role == "developer") {
-                return redirect('/developer');
-            }else{
-                return redirect('/buyer');
-            }
-
             return redirect('/');
         }
 

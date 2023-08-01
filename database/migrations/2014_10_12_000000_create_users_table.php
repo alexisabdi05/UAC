@@ -15,13 +15,16 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('gender');
-            $table->string('role');
-            $table->decimal('wallet')->default(0);
-            $table->rememberToken();
+            $table->text('hobbies');
+            $table->string('instagram_username');
+            $table->string('mobile_number');
+            $table->boolean('casual_friends')->default(false);
+            $table->integer('registration_price');
             $table->timestamps();
+            $table->integer('wallet')->default(0);
+            $table->string('profile_picture_url')->default('default.png');
         });
     }
 

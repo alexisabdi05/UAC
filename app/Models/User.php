@@ -18,9 +18,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     // protected $fillable = [
-    //     'name',
-    //     'email',
-    //     'password',
+    //     'profile_picture_url',
     // ];
         protected $guarded = ['id'];
     /**
@@ -43,11 +41,13 @@ class User extends Authenticatable
         // 'password' => 'hashed',
     ];
 
-    public function Game(){
-        return $this->hasMany(Game::class);
+    public function friends()
+    {
+        return $this->belongsToMany(User::class, 'friendships', 'user_id', 'friend_id')->withTimestamps();
     }
 
-    public function Transaction(){
-        return $this->hasMany(Transaction::class);
+    public function isFriendWith(User $user)
+    {
+        return $this->friends()->where('friend_id', $user->id)->exists();
     }
 }
