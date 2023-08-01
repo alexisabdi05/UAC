@@ -57,7 +57,7 @@ class LoginController extends Controller
 
         if(Auth::attempt($validate)){
             $request->session()->regenerate();
-            return redirect('/');
+            return redirect('/home');
         }
 
         return redirect()->back()->with('loginError', 'Login Failed!');

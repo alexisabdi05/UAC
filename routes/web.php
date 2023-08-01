@@ -27,16 +27,16 @@ Route::post('/send-friend-request/{user}', [FriendshipController::class, 'sendFr
     ->middleware('auth')
     ->name('sendFriendRequest');
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'userHome'])->middleware('auth');
 
 
 Route::get('/users/{user}', [UserController::class, 'show'])->name('user.show');
 
 
-
-
 Route::get('/register', [LoginController::class, 'create']);
 Route::post('/register', [LoginController::class, 'store']);
 Route::post('/login', [LoginController::class, 'login']);
+
 
 
 Route::get('/login', function(){
