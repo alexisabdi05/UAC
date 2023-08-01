@@ -50,4 +50,5 @@ Route::get('/login', function(){
 });
 
 Route::get('/logout', [LoginController::class, 'logout']);
+Route::delete('/delete-game/{game_id}', [GameController::class, 'destroy']);
 

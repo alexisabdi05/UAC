@@ -73,8 +73,12 @@ class GameController extends Controller
 
     }
 
-    public function destroy(Game $game)
+    public function destroy(Game $game_id)
     {
-        //
+        $game = Game::find($game_id);
+        Storage::delete($game->image);
+        $game->delete();
+
+        return redirect('/developer');
     }
 }

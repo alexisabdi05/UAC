@@ -9,13 +9,22 @@
                 <form action="/register" method="POST">
                     @csrf
                     <input type="text" class="block border border-grey-light w-full p-3 rounded mb-4" name="name"
-                        placeholder="Full Name" required />
+                        placeholder="Full Name" required value={{ old('name') }} />
+                        @error('name')
+                        {{ $message }}
+                        @enderror
 
                     <input type="email" class="block border border-grey-light w-full p-3 rounded mb-4" name="email"
-                        placeholder="Email" required />
+                        placeholder="Email" required value={{ old('email') }}/>
+                        @error('email')
+                        {{ $message }}
+                        @enderror
 
                     <input type="password" class="block border border-grey-light w-full p-3 rounded mb-4" name="password"
-                        placeholder="Password" required />
+                        placeholder="Password" required value={{ old('password') }}/>
+                        @error('password')
+                        {{ $message }}
+                        @enderror
 
                     <div class="my-4">
                         <input type="radio" name="gender" id="L" value="L" required>
@@ -23,6 +32,9 @@
                         <input type="radio" name="gender" id="P" value="P" required>
                         <label for="P">Perempuan</label>
                     </div>
+                    @error('gender')
+                        {{ $message }}
+                        @enderror
 
                     <div class="my-4">
                         <input type="radio" name="role" id="developer" value="developer" required>
@@ -30,6 +42,9 @@
                         <input type="radio" name="role" id="buyer" value="buyer" required>
                         <label for="buyer">Buyer</label>
                     </div>
+                    @error('role')
+                        {{ $message }}
+                        @enderror
 
 
                     <button type="submit"

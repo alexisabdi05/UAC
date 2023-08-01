@@ -42,6 +42,16 @@
                                         stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
                                 </svg>
                             </a>
+
+                            <form action="/developer/delete-game/{{$game->id}}" method="post" class="mt-5">
+                                @method('delete')
+                                @csrf
+                                <button
+                                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg">
+                                    Delete Game
+                                </button>
+                            </form>
+
                         </div>
                     </div>
                 @endforeach
